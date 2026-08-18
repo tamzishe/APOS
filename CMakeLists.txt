@@ -1,38 +1,24 @@
-cmake_minimum_required(VERSION 3.19)
-project(APOS1 LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.16)
+project(APOSMusicPlayer)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets LinguistTools)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-qt_standard_project_setup()
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
-qt_add_executable(APOS1
-    WIN32 MACOSX_BUNDLE
+find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia)
+
+add_executable(APOSMusicPlayer
     main.cpp
-    apos.cpp
-    apos.h
-    apos.ui
+    mainwindow.cpp
+    mainwindow.h
+    songmodel.cpp
+    songmodel.h
+    musicscanner.cpp
+    musicscanner.h
+    song.h
 )
 
-qt_add_translations(
-    TARGETS APOS1
-    TS_FILES APOS1_en_CA.ts
-)
-
-target_link_libraries(APOS1
-    PRIVATE
-        Qt::Core
-        Qt::Widgets
-)
-
-install(TARGETS APOS1
-    BUNDLE  DESTINATION .
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-)
-
-qt_generate_deploy_app_script(
-    TARGET APOS1
-    OUTPUT_SCRIPT deploy_script
-    NO_UNSUPPORTED_PLATFORM_ERROR
-)
-install(SCRIPT ${deploy_script})
+target_link_libraries(APOSMusicPlayer PRIVATE Qt6::Widgets Qt6::Multimedia)
