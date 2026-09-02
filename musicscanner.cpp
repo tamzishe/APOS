@@ -7,8 +7,7 @@
 #include <QEventLoop>
 #include <QUrl>
 
-QVector<Song> MusicScanner::scanFolder(const QString &folderPath)
-{
+QVector<Song> MusicScanner::scanFolder(const QString &folderPath){
     QVector<Song> songs;
 
     QStringList filters;
