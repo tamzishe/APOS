@@ -29,6 +29,8 @@ QVariant SongModel::data(const QModelIndex &index, int role) const
         return song.album;
     case FilePathRole:
         return song.filePath;
+    case CoverArtRole:
+        return song.coverArt;
     default:
         return QVariant();
     }
@@ -48,5 +50,6 @@ QHash<int, QByteArray> SongModel::roleNames() const
     roles[ArtistRole] = "artist";
     roles[AlbumRole] = "album";
     roles[FilePathRole] = "filePath";
+    roles[CoverArtRole] = "coverArt";
     return roles;
 }

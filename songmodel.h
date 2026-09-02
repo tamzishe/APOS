@@ -13,7 +13,8 @@ public:
         TitleRole = Qt::UserRole + 1,
         ArtistRole,
         AlbumRole,
-        FilePathRole
+        FilePathRole,
+        CoverArtRole
     };
 
     explicit SongModel(QObject *parent = nullptr);

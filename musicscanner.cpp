@@ -44,6 +44,10 @@ QVector<Song> MusicScanner::scanFolder(const QString &folderPath){
         song.title  = meta.stringValue(QMediaMetaData::Title);
         song.artist = meta.stringValue(QMediaMetaData::ContributingArtist);
         song.album  = meta.stringValue(QMediaMetaData::AlbumTitle);
+        song.coverArt = meta.value(QMediaMetaData::CoverArtImage).value<QImage>();
+        if (song.coverArt.isNull()) {
+            song.coverArt = meta.value(QMediaMetaData::ThumbnailImage).value<QImage>();
+        }
 
         // Fall back to something sensible if tags are missing/empty.
         if (song.title.isEmpty())
