@@ -15,13 +15,14 @@ void MusicPlayer::playSong(const QString &songPath){
 void MusicPlayer::pauseSong(){
     player.pause();
 }
-// checking out of bound is not need, QAudioOutput clamps internally from 0 to 1
+// checking out of bound is not needed, QAudioOutput clamps internally from 0 to 1
+// however, i'll keep it to avoid potential errors
 void MusicPlayer::increaseVolume(){
-    if (audioOut.volume() == 1.0) return;
+    if (audioOut.volume() >= 0.999) return;
     audioOut.setVolume(audioOut.volume()+0.1);
 }
 void MusicPlayer::decreaseVolume(){
-    if (audioOut.volume() == 0.0) return;
+    if (audioOut.volume() <= 0.001) return;
     audioOut.setVolume(audioOut.volume()-0.1);
 }
 float MusicPlayer::getVolume(){
