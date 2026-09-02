@@ -10,6 +10,8 @@ class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
 
 private:
     QStackedWidget *m_stack;
@@ -21,4 +23,12 @@ private:
 
     void loadMusicFolder(const QString &folderPath);
     void onSongClicked(const QModelIndex &idx);
+
+    int m_currentRow = -1;
+
+    void activateSong(const QModelIndex &idx);
+    void playRow(int row);
+    void moveSelection(int delta);
+    void onPreviousPressed();
+    void onNextPressed();
 };
