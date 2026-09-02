@@ -21,6 +21,8 @@ add_executable(APOSMusicPlayer
     song.h
     musicplayer.cpp
     musicplayer.h
+    songdelegate.cpp
+    songdelegate.h
 )
 
 target_link_libraries(APOSMusicPlayer PRIVATE Qt6::Widgets Qt6::Multimedia)
