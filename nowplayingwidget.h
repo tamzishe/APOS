@@ -4,8 +4,6 @@
 #include <QPushButton>
 #include "song.h"
 
-// Fullscreen "now playing" view: enlarged cover art, title, artist.
-// A progress bar can be added here later.
 class NowPlayingWidget : public QWidget {
     Q_OBJECT
 public:

@@ -3,9 +3,6 @@
 #include <QVector>
 #include "song.h"
 
-// Holds the scanned song list and feeds it to whatever view is attached
-// (a QListView in our case). This is the single source of truth for
-// song data — the view itself holds nothing.
 class SongModel : public QAbstractListModel {
     Q_OBJECT
 public:

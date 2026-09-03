@@ -3,6 +3,7 @@
 #include "musicplayer.h"
 #include "songdelegate.h"
 #include <QKeyEvent>
+#include <QTimer>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -29,14 +30,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     setCentralWidget(m_stack);
     setWindowTitle("APOS Music Player");
-    resize(400, 600);
+    // resize(400, 600);
+    setFixedSize(320, 480);
 
     setFocusPolicy(Qt::StrongFocus);
     setFocus();
 
     // Hardcoded for now, per the current scope
     // swap for a folder picker (QFileDialog::getExistingDirectory) once this works.
-    loadMusicFolder("C:/Users/tamzm/Music");
+    QTimer::singleShot(0, this, [this]() {
+        loadMusicFolder("C:/Users/tamzm/Music");
+    });
 }
 
 void MainWindow::loadMusicFolder(const QString &folder_path){
@@ -122,17 +126,13 @@ void MainWindow::playRow(int row)
     const QModelIndex idx = m_model->index(row, 0);
     const QString filePath = idx.data(SongModel::FilePathRole).toString();
 
-    mp.playSong(filePath);
+    mp->playSong(filePath);
     m_currentRow = row;
 
-    // Keep the highlighted row in sync with whatever's actually playing,
-    // so Up/Down browsing starts from the right place afterward.
+    // highlighted row
     m_listView->setCurrentIndex(idx);
 
-    // Keep the Now Playing widget's displayed info in sync too — even
-    // if it's not the visible page right now, so it's already correct
-    // whenever the user switches to it (and stays correct while Left/
-    // Right change songs from within that page).
+    // update the NowPlayingWidget with the current song's info
     Song song;
     song.title    = idx.data(SongModel::TitleRole).toString();
     song.artist   = idx.data(SongModel::ArtistRole).toString();
