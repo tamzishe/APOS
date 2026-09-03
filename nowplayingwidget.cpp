@@ -6,10 +6,11 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
     : QWidget(parent)
 {
     m_backButton = new QPushButton("< Back", this);
+    m_backButton->setFocusPolicy(Qt::NoFocus);
 
     m_coverLabel = new QLabel(this);
     m_coverLabel->setAlignment(Qt::AlignCenter);
-    m_coverLabel->setFixedSize(300, 300); // enlarged, vs. ~64px in the list row
+    m_coverLabel->setFixedSize(300, 300);
 
     m_titleLabel = new QLabel(this);
     m_titleLabel->setAlignment(Qt::AlignCenter);
@@ -28,7 +29,7 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
     layout->addWidget(m_titleLabel);
     layout->addWidget(m_artistLabel);
     layout->addStretch();
-    
+
     // add progress bar/slider later
 
     connect(m_backButton, &QPushButton::clicked, this, &NowPlayingWidget::backRequested);

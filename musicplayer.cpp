@@ -15,6 +15,23 @@ void MusicPlayer::playSong(const QString &songPath){
 void MusicPlayer::pauseSong(){
     player.pause();
 }
+void MusicPlayer::resume(){
+    player.play();
+}
+void MusicPlayer::togglePlayPause(){
+    if (player.playbackState() == QMediaPlayer::PlayingState) {
+        pauseSong();
+    } else {
+        resume();
+    }
+}
+void MusicPlayer::restart(){
+    player.setPosition(0);
+}
+qint64 MusicPlayer::position() const{
+    return player.position();
+}
+
 // checking out of bound is not needed, QAudioOutput clamps internally from 0 to 1
 // however, i'll keep it to avoid potential errors
 void MusicPlayer::increaseVolume(){

@@ -18,9 +18,6 @@ QVector<Song> MusicScanner::scanFolder(const QString &folderPath){
     while (it.hasNext()) {
         const QString filePath = it.next();
 
-        // QMediaPlayer loads metadata asynchronously, so we spin a local
-        // event loop per file and wait for it to finish (or fail) before
-        // moving to the next one. Simple and fine for a first version;
         // if scanning a large library gets slow, this is the first place
         // to revisit (e.g. move scanning to a background thread).
         QMediaPlayer player;
@@ -49,7 +46,7 @@ QVector<Song> MusicScanner::scanFolder(const QString &folderPath){
             song.coverArt = meta.value(QMediaMetaData::ThumbnailImage).value<QImage>();
         }
 
-        // Fall back to something sensible if tags are missing/empty.
+        // Fall backs
         if (song.title.isEmpty())
             song.title = QFileInfo(filePath).completeBaseName();
         if (song.artist.isEmpty())
